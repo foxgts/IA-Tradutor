@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Kitsune-Translate</title>
+
+    <link
+        rel="icon"
+        href="{{ url_for('static', filename='Logo.png') }}"
+        type="image/png">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='app.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header-logo">
+        <img
+            src="{{ url_for('static', filename='Logo.png') }}"
+            alt="Kitsune-Translate"
+            class="logo">
+        <h1>Kitsune-Translate</h1>
+    </div>
+
+    <!-- STATUS -->
+
+    <div class="card">
+
+        <h2>Status Ollama</h2>
+
+        <div id="ollamaStatus">
+            Verificando...
+        </div>
+
+    </div>
+
+    <!-- MODELO -->
+
+    <div class="card">
+
+        <h2>Modelo</h2>
+
+        <select id="model">
+
+            {% for model in models %}
+                <option value="{{ model }}">
+                    {{ model }}
+                </option>
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <!-- ARQUIVO -->
+
+    <div class="card">
+
+        <h2>Arquivos .SRT</h2>
+
+        <input
+            type="file"
+            id="subtitleFile"
+            accept=".srt"
+            multiple>
+
+        <div id="fileInfo">
+            Nenhum arquivo carregado.
+        </div>
+
+    </div>
+
+    <!-- BOTÃO -->
+
+    <div class="card">
+
+        <button id="translateBtn" disabled>
+            Traduzir Todas
+        </button>
+
+    </div>
+
+    <!-- PROGRESSO GERAL (FILA) -->
+
+    <div class="card">
+
+        <h2>Progresso Geral</h2>
+
+        <div id="queueInfo">
+            Aguardando...
+        </div>
+
+        <div class="progress-bar">
+
+            <div
+                id="queueProgressFill"
+                class="progress-fill">
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PROGRESSO DO ARQUIVO ATUAL -->
+
+    <div class="card">
+
+        <h2>Progresso do Arquivo Atual</h2>
+
+        <div class="progress-bar">
+
+            <div
+                id="progressFill"
+                class="progress-fill">
+            </div>
+
+        </div>
+
+        <div id="progressText">
+
+            0%
+
+        </div>
+
+        <div id="subtitleCounter">
+
+            0 / 0 legendas
+
+        </div>
+
+        <div id="batchInfo">
+
+            Lote 0 / 0
+
+        </div>
+
+        <div id="eta">
+
+            Tempo restante: --
+
+        </div>
+
+    </div>
+
+    <!-- PREVIEW -->
+
+    <div class="card">
+
+        <h2>Últimas Traduções</h2>
+
+        <div id="preview">
+
+            Aguardando tradução...
+
+        </div>
+
+    </div>
+
+    <!-- DOWNLOAD -->
+
+    <div
+        id="downloadArea"
+        class="card"
+        style="display:none;">
+
+        <h2>Concluído</h2>
+
+        <a
+            id="downloadLink"
+            href="#">
+
+            Baixar legenda traduzida
+
+        </a>
+
+    </div>
+
+    <!-- HISTÓRICO -->
+
+    <div class="card">
+
+        <h2>Histórico</h2>
+
+        <div id="history">
+
+            Nenhum registro.
+
+        </div>
+
+        <div style="margin-top: 15px;">
+
+            <button
+                id="clearHistoryBtn"
+                class="btn-danger">
+                Limpar Histórico
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script
+src="{{ url_for('static', filename='app.js') }}">
+</script>
+
+</body>
+
+</html>
